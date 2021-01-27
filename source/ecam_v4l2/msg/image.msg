@@ -12,4 +12,4 @@ string format       # Color space/ Compression.
 
 uint8[] data        # Image data.
 
-Header header       # ROS msg header
+std_msgs/Header header       # ROS msg header
