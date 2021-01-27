@@ -11,3 +11,5 @@ int32 length        # Buffer length.
 string format       # Color space/ Compression.
 
 uint8[] data        # Image data.
+
+Header header       # ROS msg header

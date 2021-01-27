@@ -441,6 +441,8 @@ namespace ecam_v4l2
    ****************************************************************************/
   int Camera::capture(ecam_v4l2::image *image)
   {
+    unsigned long int usec;
+    unsigned long int sec;
     memset(&v4l2.buffer,0,sizeof(v4l2.buffer));
     v4l2.buffer.type = V4L2_BUF_TYPE_VIDEO_CAPTURE;
     v4l2.buffer.memory = V4L2_MEMORY_MMAP;
@@ -459,6 +461,10 @@ namespace ecam_v4l2
       ROS_WARN("Camera driver notified buffer error, ignoring frame");
       return FAILURE;
     }else{
+      usec = v4l2.buffer.timestamp.tv_sec * 1000000 + v4l2.buffer.timestamp.tv_usec;
+      sec = v4l2.buffer.timestamp.tv_sec;
+      ROS_INFO("time stamp uesc: %lu \n", usec);
+      ROS_INFO("time stamp sec: %lu \n", sec);
       image->width = v4l2.stream_fmt.fmt.pix.width;
       image->height = v4l2.stream_fmt.fmt.pix.height;
       image->length = v4l2.buffer.bytesused;
